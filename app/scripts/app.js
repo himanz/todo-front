@@ -33,7 +33,7 @@ app.config(function ($routeProvider) {
       controller: 'TasksCtrl'
     })
     .when('/register', {
-      templateUrl: 'views/register.html'
+      templateUrl: 'views/register.html',
       controller: 'AuthCtrl'
     })
     .otherwise({
