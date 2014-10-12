@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 
-var app = angular.module('fakeLunchHubApp', [
+var app = angular.module('todo', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
