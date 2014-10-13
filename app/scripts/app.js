@@ -18,7 +18,7 @@ var app = angular.module('todo', [
     'ngTouch'
   ]);
 
-app.config(function ($routeProvider) {
+app.config(['$routeProvider', function ($routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'views/main.html',
@@ -34,15 +34,35 @@ app.config(function ($routeProvider) {
     })
     .when('/register', {
       templateUrl: 'views/register.html',
-      controller: 'AuthCtrl'
+      controller: 'SignUpCtrl'
+    })
+    .when('/login', {
+      templateUrl: 'views/login.html',
+      controller: 'LoginCtrl'
     })
     .otherwise({
       redirectTo: '/'
     });
-});
+}]);
+
+// app.factory('Task', function($resource) {
+//   var tasks = $resource('/api/tasks/:id', {task:tasks}, {
+//     'query': { method: 'GET', isArray: true},
+//     'update': { method:'PUT' },
+//     'save': { method: 'POST', isArray: false}
+//   });
+//   return tasks;
+// });
 
 app.factory('Task', ['$resource', function($resource) {
-  return $resource('/api/tasks/:id.json', null, {
-    'update': { method:'PUT' }
-  });
+  function Task() {
+    this.service = $resource('/api/tasks/:taskId', {taskId: '@id'});
+  }
+  Task.prototype.all = function() {
+    return this.service.query();
+  };
+  Task.prototype.create = function(attr) {
+    return this.service.save(attr);
+  };
+  return new Task();
 }]);
