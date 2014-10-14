@@ -34,11 +34,11 @@ app.config(['$routeProvider', function ($routeProvider) {
     })
     .when('/register', {
       templateUrl: 'views/register.html',
-      controller: 'SignUpCtrl'
+      controller: 'AuthCtrl'
     })
     .when('/login', {
       templateUrl: 'views/login.html',
-      controller: 'LoginCtrl'
+      controller: 'AuthCtrl'
     })
     .otherwise({
       redirectTo: '/'
@@ -65,4 +65,17 @@ app.factory('Task', ['$resource', function($resource) {
     return this.service.save(attr);
   };
   return new Task();
+}]);
+
+app.factory('User', ['$resource', function($resource) {
+  function User() {
+    this.service = $resource('http://localhost:3000/api/users/:userId', {userId: '@id'});
+  }
+  User.prototype.all = function() {
+    return this.service.query();
+  };
+  User.prototype.create = function(attr) {
+    return this.service.save(attr);
+  };
+  return new User();
 }]);
