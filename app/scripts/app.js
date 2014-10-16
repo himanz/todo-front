@@ -15,7 +15,8 @@ var app = angular.module('todo', [
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ng-token-auth'
   ]);
 
 app.config(['$routeProvider', function ($routeProvider) {
@@ -54,9 +55,15 @@ app.config(['$routeProvider', function ($routeProvider) {
 //   return tasks;
 // });
 
+app.config(function($authProvider) {
+    $authProvider.configure({
+        apiUrl: 'http://api.example.com'
+    });
+});
+
 app.factory('Task', ['$resource', function($resource) {
   function Task() {
-    this.service = $resource('/api/tasks/:taskId', {taskId: '@id'});
+    this.service = $resource('http://localhost:3000/api/tasks/:taskId', {taskId: '@id'});
   }
   Task.prototype.all = function() {
     return this.service.query();

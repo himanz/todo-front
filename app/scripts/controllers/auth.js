@@ -14,7 +14,8 @@ angular.module('todo')
       attr.password = $scope.userPassword;
       var newUser = User.create(attr);
       console.log(newUser);
-      $scope.users.push(newUser);
+      console.log($scope);
+      $scope.push(newUser);
       $scope.newUser = '';
     };
    
