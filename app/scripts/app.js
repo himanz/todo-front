@@ -57,7 +57,7 @@ app.config(['$routeProvider', function ($routeProvider) {
 
 app.config(function($authProvider) {
     $authProvider.configure({
-        apiUrl: 'http://api.example.com'
+        apiUrl: 'http://localhost:3000'
     });
 });
 
