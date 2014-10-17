@@ -6,11 +6,22 @@ angular.module('todo')
       $auth.submitRegistration($scope.registrationForm)
         .then(function(resp) { 
           // handle success response
-          console.log(resp);
+          return resp;
         })
         .catch(function(resp) { 
           // handle error response
-          console.log(resp);
+          if(resp.status === 401) {
+            console.log('ERROR');
+          }
         });
+    };
+    $scope.handleLoginBtnClick = function() {
+      $auth.submitLogin($scope.loginForm)       
+        .then(function(resp) { 
+          // handle success response
+        })
+        .catch(function(resp) { 
+          // handle error response
+        });  
     };
   }]);
