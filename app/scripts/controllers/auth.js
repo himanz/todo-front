@@ -2,6 +2,9 @@
 
 angular.module('todo')
   .controller('AuthCtrl', ['$scope', '$auth', function ($scope, $auth) {
+    // $rootScope.$on('auth:login-success', function(ev, user) {
+    //   alert('Welcome ', user.email);
+    // });
     // $scope.handleRegBtnClick = function() {
     //   $auth.submitRegistration($scope.registrationForm)
     //     .then(function(resp) { 
