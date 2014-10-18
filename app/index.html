@@ -31,7 +31,8 @@
         </ul>
         <h3 class="text-muted">Todo</h3>
       </div>
-      <div ng-if="currentUser">Welcome, {{ currentUser.name }}</div>
+      <div> {{ user.signedIn ? "true" : false }}</div>
+      <div> {{ user.email }}</div>
       <div ng-view=""></div>
 
       <div class="footer">

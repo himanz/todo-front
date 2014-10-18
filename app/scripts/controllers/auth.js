@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('todo')
-  .controller('AuthCtrl', ['$scope', '$auth', function ($scope, $auth) {
+  .controller('AuthCtrl', ['$scope', '$auth', '$location', '$rootScope', function ($scope, $auth, $location, $rootScope) {
     // $rootScope.$on('auth:login-success', function(ev, user) {
     //   alert('Welcome ', user.email);
     // });
@@ -18,13 +18,32 @@ angular.module('todo')
     //       }
     //     });
     // };
-    // $scope.handleLoginBtnClick = function() {
-    //   $auth.submitLogin($scope.loginForm)       
-    //     .then(function(resp) { 
-    //       // handle success response
-    //     })
-    //     .catch(function(resp) { 
-    //       // handle error response
-    //     });  
-    // };
+    $scope.handleLoginBtnClick = function() {
+      $auth.submitLogin($scope.loginForm)       
+        .then(function(resp) { 
+          // handle success response
+          $location.path('/tasks');
+        })
+        .catch(function(resp) { 
+          // handle error response
+        });
+        $auth.validateUser().then(function() {
+          console.log($rootScope.user);
+        });
+        
+    };
+    $scope.login = function () {
+      $auth.submitLogin({
+        email: $scope.email,
+        password: $scope.password
+      });
+    };
+    // auth.$login('password', user).then(function(data) {
+    //       console.log(data);
+    //       if (optionalCallback) {
+    //         optionalCallback();
+    //       }
+    //       // Redirect users to /waitlist.
+    //       $location.path('/waitlist');
+    //     });
   }]);
